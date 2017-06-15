@@ -8,9 +8,9 @@ På nuværende tidspunkt kan gulp-scriptet:
 * Komprimere billeder i formaterne .png .jpg .gif .svg
 * Flytte fonts fra /src til /dist
 * Gøre filen mere overskuelig
+* Minify og uglify JavaScript
 
 To-Do:
-* Minify og uglify JavaScript
 * Oprettet en en 'gulp dist' task
 * Oprette en test task
 * Teste vejledningen
@@ -24,7 +24,7 @@ Installer gulp globalt med et kommandolinke-værktøj (CMD.exe, PowerShell etc.)
 
 Installer nødvendige udviklerpakker
 
-`npm install --save-dev gulp gulp-csso gulp-imagemin gulp-rename gulp-sass node-sass browser-sync`
+`npm install --save-dev gulp gulp-csso gulp-imagemin gulp-rename gulp-sass node-sass gulp-uglify browser-sync`
 
 Gulp scriptet forventer følgende struktur.
 ```bash

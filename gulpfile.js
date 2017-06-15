@@ -2,10 +2,22 @@
  * GULP
  */
 var gulp = require('gulp')
-var csso = require('gulp-csso');
-var imagemin = require('gulp-imagemin');
 var rename = require('gulp-rename');
+// var pump = require('pump');
+
+// Image compression
+var imagemin = require('gulp-imagemin');
+
+// SASS compiling
 var sass = require('gulp-sass')
+
+// CSS minify
+var csso = require('gulp-csso');
+
+// JavaScript uglify and minify
+var uglify = require('gulp-uglify');
+
+// Live Preview
 var browserSync = require('browser-sync').create();
 
 
@@ -114,6 +126,17 @@ gulp.task('images', function () {
     }))
     .pipe(gulp.dest('dist/images'))
 });
+
+/**
+ * MINIFY JAVASCRIPT
+ * gulp-uglify
+ */
+gulp.task('uglifyjs', function () {
+  return gulp.src('src/js/*.js')
+    .pipe(uglify)
+    .pipe(gulp.dest('dist/js'))
+});
+
 
 /**
  * COPYING FONTS
