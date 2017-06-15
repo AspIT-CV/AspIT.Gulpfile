@@ -35,6 +35,7 @@ Gulp scriptet forventer følgende struktur.
 ├── css                           # SCSS filen lavet om til css
 ├── js                            # JavaScript filer
 ├── images                        # Billeder
+├── fonts                         # Fonts
 index.html                        # Forsiden
 gulpfile.js             
 ```
