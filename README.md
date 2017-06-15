@@ -7,19 +7,19 @@ På nuværende tidspunkt kan gulp-scriptet:
 * Minify og komprimere CSS
 * Komprimere billeder i formaterne .png .jpg .gif .svg
 * Flytte fonts fra /src til /dist
-* Gøre filen mere overskuelig
 * Minify og uglify JavaScript
 
 To-Do:
 * Oprettet en en 'gulp dist' task
 * Oprette en test task
+* Gøre filen mere overskuelig
 * Teste vejledningen
 * Tilføje pump?
 
 ## Forudsætninger
 Tjek at du har installeret den nyeste version af [node.js](https://nodejs.org/en/).
 
-Installer gulp globalt med et kommandolinke-værktøj (CMD.exe, PowerShell etc.)
+Installer gulp globalt med et kommandolinje-værktøj (CMD.exe, PowerShell etc.)
 
 `npm install -g gulp`
 
@@ -42,8 +42,12 @@ gulpfile.js
 ```
 
 ## Sådan bruger du gulpfile.js
-I mens du udvikler kan du starte en lokal server der åbnes i din browser og som opdateres hver gang du gemmer en fil.
+Imens du udvikler kan du starte en lokal server der åbnes i din browser og som opdateres hver gang du gemmer en fil.
+
+Åben dit kommandolinje-værktøj i samme mappe som gulpfile.js og skriv:
+
 `gulp`
 
-Når du er klar til at distribuere din kode skrives
+Når du er klar til at distribuere din kode skrives (endnu ikke implementeret)
+
 `gulp dist`
