@@ -1,8 +1,8 @@
 # AspIT.Gulpfile
-Gulp.js script til automatisering af diverse webudviklingsopgaver som minification, linting, testing m.m. Scriptet er teknologi agnostisk og der er derfor ligegyldigt hvilken kodeeditor der anvendes. 
+Gulp.js script til automatisering af diverse webudviklingsopgaver som minification, linting, testing m.m. Scriptet er agnostisk. Det vil sige at hvis du kan installere node.js, en teksteditor og en browser på dit vaffeljern, så kan du udvikle websider.
 
 På nuværende tidspunkt kan gulp-scriptet:
-* Åbne siden i default browser som opdates ved når en fil gemmes (Live preview)
+* Starte en lille lokal server der åbnes i din browser og som opdateres hver gang en fil gemmes (Live preview)
 * Compile SCSS til CSS
 * Minify og komprimere CSS
 * Komprimere billeder i formaterne .png .jpg .gif .svg
@@ -19,11 +19,11 @@ To-Do:
 ## Forudsætninger
 Tjek at du har installeret den nyeste version af [node.js](https://nodejs.org/en/).
 
-Installer gulp globalt med et kommandolinje-værktøj (CMD.exe, PowerShell etc.)
+Installer gulp globalt med et kommandolinje-værktøj (CMD.exe, PowerShell etc.). Det er nødvendigt for at køre gulp fra kommandolinjen.
 
 `npm install -g gulp`
 
-Installer nødvendige udviklerpakker
+Installer nødvendige udviklerpakker.
 
 `npm install --save-dev gulp gulp-csso gulp-imagemin gulp-rename gulp-sass node-sass gulp-uglify browser-sync`
 
@@ -33,7 +33,7 @@ Gulp scriptet forventer følgende struktur.
 ./src                             # Mappe med udviklingskode
 ├── scss/                         # Mappe til .scss filer
     ├── *.scss                    
-├── css                           # SCSS filen lavet om til css
+├── css                           # SCSS filer lavet om til css
 ├── js                            # JavaScript filer
 ├── images                        # Billeder
 ├── fonts                         # Fonts
