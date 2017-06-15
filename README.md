@@ -1,5 +1,5 @@
 # AspIT.Gulpfile
-Gulp.js script til automatisering af diverse webudviklingsopgaver som minification, linting, testing m.m.
+Gulp.js script til automatisering af diverse webudviklingsopgaver som minification, linting, testing m.m. Scriptet er teknologi agnostisk og der er derfor ligegyldigt hvilken kodeeditor der anvendes. 
 
 På nuværende tidspunkt kan gulp-scriptet:
 * Åbne siden i default browser som opdates ved når en fil gemmes (Live preview)
