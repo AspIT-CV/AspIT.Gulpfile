@@ -16,9 +16,15 @@ To-Do:
 * Teste vejledningen
 
 ## Forudsætninger
-Installer [node.js](https://nodejs.org/en/)
-Installer gulp globalt med `npm install gulp -g`
-Installer `npm install gulp gulp-csso gulp-imagemin gulp-rename gulp-sass node-sass browser-sync`
+Tjek at du har installeret den nyeste version af [node.js](https://nodejs.org/en/).
+
+Installer gulp globalt med et kommandolinke-værktøj (CMD.exe, PowerShell etc.)
+
+`npm install -g gulp`
+
+Installer nødvendige udviklerpakker
+
+`npm install --save-dev gulp gulp-csso gulp-imagemin gulp-rename gulp-sass node-sass browser-sync`
 
 Gulp scriptet forventer følgende struktur.
 ```bash
