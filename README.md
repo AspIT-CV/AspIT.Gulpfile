@@ -1,6 +1,17 @@
 # AspIT.Gulpfile
 Gulp.js script til automatisering af diverse webudviklingsopgaver som minification, linting, testing m.m.
 
+På nuværende tidspunkt kan gulp-scriptet:
+* Åbne siden i default browser som opdates ved når en fil gemmes (Live preview)
+* Compile SCSS til CSS
+* Minify og komprimere CSS
+* Komprimere billeder i formaterne .png .jpg .gif .svg
+* Flytte fonts fra /src til /dist
+
+To-Do:
+* Minify og uglify JavaScript
+* Oprettet en en 'gulp dist' task
+
 ## Forudsætninger
 Installer [node.js](https://nodejs.org/en/)
 Installer gulp globalt med `npm install gulp -g`
