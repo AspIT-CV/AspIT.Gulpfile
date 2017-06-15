@@ -7,10 +7,13 @@ På nuværende tidspunkt kan gulp-scriptet:
 * Minify og komprimere CSS
 * Komprimere billeder i formaterne .png .jpg .gif .svg
 * Flytte fonts fra /src til /dist
+* Gøre filen mere overskuelig
 
 To-Do:
 * Minify og uglify JavaScript
 * Oprettet en en 'gulp dist' task
+* Oprette en test task
+* Teste vejledningen
 
 ## Forudsætninger
 Installer [node.js](https://nodejs.org/en/)
