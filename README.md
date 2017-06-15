@@ -14,6 +14,7 @@ To-Do:
 * Oprettet en en 'gulp dist' task
 * Oprette en test task
 * Teste vejledningen
+* Tilføje pump?
 
 ## Forudsætninger
 Tjek at du har installeret den nyeste version af [node.js](https://nodejs.org/en/).
