@@ -17,7 +17,7 @@ var browserSync = require('browser-sync').create();
  * * Live browser preview
  * * Watch for changes
  * 
- * run: gulp watch
+ * run: gulp
  * ------------------------
  */
 
