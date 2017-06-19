@@ -37,7 +37,7 @@ Gulp scriptet forventer følgende struktur.
 ├── js                            # JavaScript filer
 ├── images                        # Billeder
 ├── fonts                         # Fonts
-index.html                        # Forsiden
+├── index.html                    # Forsiden
 gulpfile.js             
 ```
 
