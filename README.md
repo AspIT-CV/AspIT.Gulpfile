@@ -1,11 +1,12 @@
 # AspIT.Gulpfile
-Gulp.js script til automatisering af diverse webudviklingsopgaver som minification, linting, testing m.m. Scriptet er agnostisk. Det vil sige at hvis du kan installere node.js, en teksteditor og en browser på dit vaffeljern, så kan du udvikle websider.
+Gulp.js script til automatisering af diverse webudviklingsopgaver. Scriptet kan bruges alle steder hvor du kan installere node.js, en teksteditor og en browser.
 
 På nuværende tidspunkt kan gulp-scriptet:
 * Starte en lille lokal server der åbnes i din browser og som opdateres hver gang en fil gemmes (Live preview)
-* Compile SCSS til CSS
+* Transpile SCSS til CSS
+* Automatisk sætte vendorprefixes på CSS regler 
 * Minify og komprimere CSS
-* Komprimere billeder i formaterne .png .jpg .gif .svg
+* Komprimere billeder ( virker med .png .jpg .gif .svg )
 * Flytte fonts fra /src til /dist
 * Minify og uglify JavaScript
 
@@ -13,8 +14,6 @@ To-Do:
 * Oprettet en en 'gulp dist' task
 * Oprette en test task
 * Gøre filen mere overskuelig
-* Teste vejledningen
-* Tilføje pump?
 
 ## Forudsætninger
 Tjek at du har installeret den nyeste version af [node.js](https://nodejs.org/en/).
@@ -23,9 +22,9 @@ Installer gulp globalt med et kommandolinje-værktøj (CMD.exe, PowerShell etc.)
 
 `npm install --global gulp-cli`
 
-Installer nødvendige udviklerpakker.
+Installer nødvendige pakker i dit udviklermiljø.
 
-`npm install --save-dev gulp gulp-csso gulp-imagemin gulp-rename gulp-sass node-sass gulp-uglify browser-sync`
+`npm install --save-dev gulp gulp-csso gulp-autoprefixer gulp-imagemin gulp-rename gulp-sass node-sass gulp-uglify browser-sync`
 
 Gulp scriptet forventer følgende struktur.
 ```bash
@@ -42,7 +41,7 @@ gulpfile.js
 ```
 
 ## Sådan bruger du gulpfile.js
-Imens du udvikler kan du starte en lokal server der åbnes i din browser og som opdateres hver gang du gemmer en fil.
+Når du udvikler kan du starte en lokal server der åbnes i din browser og som opdateres hver gang du gemmer en fil.
 
 Åben dit kommandolinje-værktøj i samme mappe som gulpfile.js og skriv:
 
