@@ -1,24 +1,24 @@
 /**
  * GULP
  */
-var gulp = require('gulp')
-var rename = require('gulp-rename');
+const gulp = require('gulp')
+const rename = require('gulp-rename');
 // var pump = require('pump');
 
 // Image compression
-var imagemin = require('gulp-imagemin');
+const imagemin = require('gulp-imagemin');
 
 // SASS compiling
-var sass = require('gulp-sass')
+const sass = require('gulp-sass')
 
 // CSS minify
-var csso = require('gulp-csso');
+const csso = require('gulp-csso');
 
 // JavaScript uglify and minify
-var uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify');
 
 // Live Preview
-var browserSync = require('browser-sync').create();
+const browserSync = require('browser-sync').create();
 
 
 /**
