@@ -9,10 +9,13 @@ const rename = require('gulp-rename');
 const imagemin = require('gulp-imagemin');
 
 // SASS compiling
-const sass = require('gulp-sass')
+const sass = require('gulp-sass');
 
 // CSS minify
 const csso = require('gulp-csso');
+
+// CSS autoprefixer
+const autoprefixer = require('gulp-autoprefixer');
 
 // JavaScript uglify and minify
 const uglify = require('gulp-uglify');
@@ -55,6 +58,21 @@ gulp.task('sass', function () {
 
 
 /**
+ * AUTOPREFIXER
+ * gulp-autoprefixer
+ */
+
+// Definerer en gulp task kalder autoprefixer
+gulp.task('autoprefixer', function () {
+  return gulp.src('src/css/*.css')
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
+    }))
+});
+
+
+/**
  * LIVE BROWSER PREVIEW
  * browser-sync
  */
@@ -73,8 +91,8 @@ gulp.task('browserSync', function () {
  * WATCH FOR CHANGES
  */
 
-// Watch kører en række tasks inden watch starter
-gulp.task('default', ['browserSync', 'sass'], function () {
+// Watch tasken kører en række tjek inden den starter
+gulp.task('default', ['browserSync', 'sass', 'autoprefixer'], function () {
   gulp.watch('src/scss/*.scss', ['sass']);
 
   // Reloader browser ved ændringer i .html filer
@@ -146,4 +164,45 @@ gulp.task('uglifyjs', function () {
 gulp.task('fonts', function () {
   return gulp.src('src/fonts/**/*')
     .pipe(gulp.dest('dist/fonts'))
+});
+
+/*
+* --------------------- 
+* DEPLOY
+*
+* Upload only new files to FTP
+*
+* ---------------------
+*/
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+var ftp = require('vinyl-ftp');
+
+// Create config.json with following object {"host":"HOSTNAME","user":"YOUR_USERNAME","password":"YOUR_PASSWORD"}
+var config = require('./config/config.json');
+
+gulp.task('deploy', function () {
+    var conn = ftp.create({
+        host:       config.host,
+        user:       config.user,
+        password:   config.password,
+        parallel:   10,
+        log:        gutil.log
+    });
+
+    // Define what to upload
+    var globs = [
+        'css/**',
+        'php/**',
+        'js/**',
+        'img/**',
+        'fonts/**',
+        'index.php',
+        'login.php'
+    ];
+
+    return gulp.src( globs, { base: '.', buffer: false})
+        // Name of folder to upload to
+        .pipe( conn.newer('/folder/name'))
+        .pipe( conn.dest('/folder/name'))
 });
