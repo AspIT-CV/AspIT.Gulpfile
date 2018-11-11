@@ -33,7 +33,6 @@ const browserSync = require('browser-sync').create();
  * DEVELOPMENT TASKS
  * 
  * * Sass transpiling
- * * JavaScript transpiling
  * * Live browser preview
  * * Watch for changes
  * 
@@ -60,15 +59,6 @@ gulp.task('sass', function () {
     }))
 });
 
-/**
- * JAVASCRIPT TRANSPILE
- * gulp-babel
- */
-gulp.task('babel', function () {
-  return gulp.src('src/js/**/*.js')
-    .pipe(babel())
-    .pipe(gulp.dest('src/js'))
-})
 
 /**
  * AUTOPREFIXER
@@ -102,7 +92,7 @@ gulp.task('browserSync', function () {
  * WATCH FOR CHANGES
  */
 // Watch tasken kører en række tjek inden den starter
-gulp.task('default', ['browserSync', 'sass', 'autoprefixer', 'js'], function () {
+gulp.task('default', ['browserSync', 'sass', 'autoprefixer', 'babel'], function () {
   gulp.watch('src/scss/*.scss', ['sass']);
 
   // Reloader browser ved ændringer i .html filer
@@ -164,14 +154,27 @@ gulp.task('fonts', function () {
 });
 
 /**
+ * JAVASCRIPT TRANSPILE
+ * gulp-babel
+ */
+gulp.task('babel', function () {
+  return gulp.src('src/js/**/*.js')
+    .pipe(babel())
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js'))
+})
+
+/**
  * MINIFY JAVASCRIPT
  * gulp-uglify
  */
-gulp.task('uglifyjs', function () {
-  return gulp.src('src/js/**/*.js')
-    .pipe(uglify)
-    .pipe(gulp.dest('dist/js'))
-});
+// gulp.task('uglifyjs', function () {
+//   return gulp.src('dist/js/**/*.js')
+//     .pipe(uglify())
+//     .pipe(gulp.dest('dist/js'))
+// });
+
+gulp.task('dist', ['csso', 'images', 'fonts', 'babel'])
 
 
 /*
@@ -182,36 +185,36 @@ gulp.task('uglifyjs', function () {
 *
 * ---------------------
 */
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var ftp = require('vinyl-ftp');
+// var gulp = require('gulp');
+// var gutil = require('gulp-util');
+// var ftp = require('vinyl-ftp');
 
 // Create config.json with following object {"host":"HOSTNAME","user":"YOUR_USERNAME","password":"YOUR_PASSWORD"}
 // IMPORTANT: Remember to add file to .gitignore!
-var config = require('./config/config.json');
+// var config = require('./config/config.json');
 
-gulp.task('deploy', function () {
-    var conn = ftp.create({
-        host:       config.host,
-        user:       config.user,
-        password:   config.password,
-        parallel:   10,
-        log:        gutil.log
-    });
+// gulp.task('deploy', function () {
+//     var conn = ftp.create({
+//         host:       config.host,
+//         user:       config.user,
+//         password:   config.password,
+//         parallel:   10,
+//         log:        gutil.log
+//     });
 
     // Define what to upload
-    var globs = [
-        'css/**',
-        'php/**',
-        'js/**',
-        'img/**',
-        'fonts/**',
-        'index.php',
-        'login.php'
-    ];
+    // var globs = [
+    //     'css/**',
+    //     'php/**',
+    //     'js/**',
+    //     'img/**',
+    //     'fonts/**',
+    //     'index.php',
+    //     'login.php'
+    // ];
 
-    return gulp.src( globs, { base: '.', buffer: false})
-        // Name of folder to upload to
-        .pipe( conn.newer('/folder/name'))
-        .pipe( conn.dest('/folder/name'))
-});
+//     return gulp.src( globs, { base: '.', buffer: false})
+//         // Name of folder to upload to
+//         .pipe( conn.newer('/folder/name'))
+//         .pipe( conn.dest('/folder/name'))
+// });
