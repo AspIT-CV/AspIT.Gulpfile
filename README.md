@@ -17,7 +17,7 @@ To-Do:
 ## Forudsætninger
 Tjek at du har installeret den nyeste version af [node.js](https://nodejs.org/en/).
 
-Installer gulp globalt med et kommandolinje-værktøj (CMD.exe, PowerShell etc.). Det er nødvendigt for at køre gulp fra kommandolinjen.
+Installer gulp globalt med en terminal. Det er nødvendigt for at køre gulp fra kommandolinjen.
 
 `npm install --global gulp-cli`
 
