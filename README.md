@@ -24,7 +24,7 @@ Installer gulp globalt med et kommandolinje-værktøj (CMD.exe, PowerShell etc.)
 
 Installer nødvendige pakker i dit udviklermiljø.
 
-`npm install --save-dev gulp gulp-csso gulp-autoprefixer gulp-imagemin gulp-rename gulp-sass node-sass gulp-uglify browser-sync`
+`npm install --save-dev gulp gulp-csso gulp-autoprefixer gulp-imagemin gulp-rename gulp-sass node-sass gulp-uglify gulp-babel@next @babel/core @babel/preset-env browser-sync`
 
 Gulp scriptet forventer følgende struktur.
 ```bash
