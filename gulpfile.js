@@ -8,7 +8,7 @@ const rename = require('gulp-rename');
 // Image compression
 const imagemin = require('gulp-imagemin');
 
-// SASS compiling
+// SASS transpiling
 const sass = require('gulp-sass');
 
 // CSS minify
@@ -16,6 +16,10 @@ const csso = require('gulp-csso');
 
 // CSS autoprefixer
 const autoprefixer = require('gulp-autoprefixer');
+
+// JavaScript transpiling
+// Remember .babelrc in root directory
+const babel = require('gulp-babel')
 
 // JavaScript uglify and minify
 const uglify = require('gulp-uglify');
@@ -28,7 +32,8 @@ const browserSync = require('browser-sync').create();
  * ------------------------
  * DEVELOPMENT TASKS
  * 
- * * Sass compilation
+ * * Sass transpiling
+ * * JavaScript transpiling
  * * Live browser preview
  * * Watch for changes
  * 
@@ -38,10 +43,9 @@ const browserSync = require('browser-sync').create();
 
 
 /**
- * SASS COMPILATION
+ * SASS TRANSPILING
  * gulp-sass
  */
-
 // Definerer en gulp task kaldet sass
 gulp.task('sass', function () {
   return gulp.src('src/scss/*.scss')
@@ -56,12 +60,20 @@ gulp.task('sass', function () {
     }))
 });
 
+/**
+ * JAVASCRIPT TRANSPILE
+ * gulp-babel
+ */
+gulp.task('babel', function () {
+  return gulp.src('src/js/**/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('src/js'))
+})
 
 /**
  * AUTOPREFIXER
  * gulp-autoprefixer
  */
-
 // Definerer en gulp task kalder autoprefixer
 gulp.task('autoprefixer', function () {
   return gulp.src('src/css/*.css')
@@ -76,7 +88,6 @@ gulp.task('autoprefixer', function () {
  * LIVE BROWSER PREVIEW
  * browser-sync
  */
-
 // Lave en browserSync task som opdaterer browseren hvis der sker ændringer
 gulp.task('browserSync', function () {
   browserSync.init({
@@ -90,9 +101,8 @@ gulp.task('browserSync', function () {
 /**
  * WATCH FOR CHANGES
  */
-
 // Watch tasken kører en række tjek inden den starter
-gulp.task('default', ['browserSync', 'sass', 'autoprefixer'], function () {
+gulp.task('default', ['browserSync', 'sass', 'autoprefixer', 'js'], function () {
   gulp.watch('src/scss/*.scss', ['sass']);
 
   // Reloader browser ved ændringer i .html filer
@@ -112,6 +122,7 @@ gulp.task('default', ['browserSync', 'sass', 'autoprefixer'], function () {
  * * Optimize images
  * * Copy fonts
  * 
+ * * JavaScript transpile 
  * * Minify and Uglify JS
  * 
  * run: gulp dist
@@ -124,7 +135,6 @@ gulp.task('default', ['browserSync', 'sass', 'autoprefixer'], function () {
  * gulp-csso
  * gulp-rename
  */
-
 gulp.task('csso', function () {
   return gulp.src('src/css/styles.css')
     .pipe(csso())
@@ -136,7 +146,6 @@ gulp.task('csso', function () {
  * OPTIMIZE IMAGES
  * gulp-imagemin
  */
-
 gulp.task('images', function () {
   return gulp.src('src/images/**/*.(png|jpg|gif|svg)')
     .pipe(imagemin({
@@ -146,25 +155,24 @@ gulp.task('images', function () {
 });
 
 /**
- * MINIFY JAVASCRIPT
- * gulp-uglify
- */
-gulp.task('uglifyjs', function () {
-  return gulp.src('src/js/*.js')
-    .pipe(uglify)
-    .pipe(gulp.dest('dist/js'))
-});
-
-
-/**
  * COPYING FONTS
  * 
  */
-
 gulp.task('fonts', function () {
   return gulp.src('src/fonts/**/*')
     .pipe(gulp.dest('dist/fonts'))
 });
+
+/**
+ * MINIFY JAVASCRIPT
+ * gulp-uglify
+ */
+gulp.task('uglifyjs', function () {
+  return gulp.src('src/js/**/*.js')
+    .pipe(uglify)
+    .pipe(gulp.dest('dist/js'))
+});
+
 
 /*
 * --------------------- 
@@ -179,6 +187,7 @@ var gutil = require('gulp-util');
 var ftp = require('vinyl-ftp');
 
 // Create config.json with following object {"host":"HOSTNAME","user":"YOUR_USERNAME","password":"YOUR_PASSWORD"}
+// IMPORTANT: Remember to add file to .gitignore!
 var config = require('./config/config.json');
 
 gulp.task('deploy', function () {
