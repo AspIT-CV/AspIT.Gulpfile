@@ -48,6 +48,6 @@ Når du udvikler kan du starte en lokal server der åbnes i din browser og som o
 
 `gulp`
 
-Når du er klar til at distribuere din kode skrives (endnu ikke implementeret)
+Når du er klar til at distribuere din kode skrives:
 
 `gulp dist`
