@@ -8,10 +8,9 @@ På nuværende tidspunkt kan gulp-scriptet:
 * Minify og komprimere CSS
 * Komprimere billeder ( virker med .png .jpg .gif .svg )
 * Flytte fonts fra /src til /dist
-* Minify og uglify JavaScript
+* Transpile og uglify JavaScript
 
 To-Do:
-* Oprettet en en 'gulp dist' task
 * Oprette en test task
 * Gøre filen mere overskuelig
 
