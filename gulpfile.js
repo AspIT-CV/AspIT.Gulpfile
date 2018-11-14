@@ -18,7 +18,7 @@ const csso = require('gulp-csso');
 const autoprefixer = require('gulp-autoprefixer');
 
 // JavaScript transpiling
-// Remember .babelrc in root directory
+// Remember babel config in package.json
 const babel = require('gulp-babel')
 
 // JavaScript uglify and minify
@@ -31,11 +31,11 @@ const browserSync = require('browser-sync').create();
 /**
  * ------------------------
  * DEVELOPMENT TASKS
- * 
+ *
  * * Sass transpiling
  * * Live browser preview
  * * Watch for changes
- * 
+ *
  * run: gulp
  * ------------------------
  */
@@ -49,10 +49,10 @@ const browserSync = require('browser-sync').create();
 gulp.task('sass', function () {
   return gulp.src('src/scss/*.scss')
     .pipe(sass())
-    
+
     // Flyt css filer ind i css mappen
     .pipe(gulp.dest('src/css'))
-    
+
     // Reload browserSync
     .pipe(browserSync.reload({
       stream: true
@@ -106,15 +106,15 @@ gulp.task('default', ['browserSync', 'sass', 'autoprefixer', 'babel'], function 
 
 /**
  * ------------------------
- * DISTRIBUTE 
- * 
+ * DISTRIBUTE
+ *
  * * Minify CSS
  * * Optimize images
  * * Copy fonts
- * 
- * * JavaScript transpile 
+ *
+ * * JavaScript transpile
  * * Minify and Uglify JS
- * 
+ *
  * run: gulp dist
  * ------------------------
  */
@@ -146,7 +146,7 @@ gulp.task('images', function () {
 
 /**
  * COPYING FONTS
- * 
+ *
  */
 gulp.task('fonts', function () {
   return gulp.src('src/fonts/**/*')
@@ -178,7 +178,7 @@ gulp.task('dist', ['csso', 'images', 'fonts', 'babel'])
 
 
 /*
-* --------------------- 
+* ---------------------
 * DEPLOY
 *
 * Upload only new files to FTP
