@@ -10,27 +10,22 @@
     "type": "git",
     "url": "git+https://github.com/AspIT-CV/AspIT.Gulpfile.git"
   },
-  "keywords": [
-    "gulp",
-    "gulpfile",
-    "node.js",
-    "babel",
-    "javascript",
-    "js",
-    "scss",
-    "sass"
-  ],
   "author": "klementj",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AspIT-CV/AspIT.Gulpfile/issues"
   },
   "homepage": "https://github.com/AspIT-CV/AspIT.Gulpfile#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.1.5",
     "@babel/plugin-transform-async-to-generator": "^7.1.0",
     "@babel/preset-env": "^7.1.5",
+    "babelify": "^10.0.0",
     "browser-sync": "^2.26.3",
+    "browserify": "^16.2.3",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-babel": "^8.0.0",
@@ -38,22 +33,23 @@
     "gulp-imagemin": "^5.0.3",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",
-    "gulp-uglify": "^3.0.1"
-    },
-    "babel": {
-        "presets": [
-            [ "env", {
-                "targets": { "edge": "19" }
-            } ]
-        ],
-        "plugins": [
-            "@babel/plugin-transform-async-to-generator",
-            [ "transform-runtime",
-                {
-                    "polyfill": false,
-                    "regenerator": true
-                }
-            ]
-        ]
-    }
+    "gulp-uglify": "^3.0.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "firefox": "30"
+          },
+          "modules": "cjs",
+          "useBuiltIns": "usage",
+          "debug": false
+        }
+      ]
+    ]
+  }
 }

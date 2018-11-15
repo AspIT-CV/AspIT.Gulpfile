@@ -20,6 +20,10 @@ const autoprefixer = require('gulp-autoprefixer');
 // JavaScript transpiling
 // Remember babel config in package.json
 const babel = require('gulp-babel')
+const browserify = require('browserify');
+const babelify = require('babelify');
+const vinylSrc = require('vinyl-source-stream');
+const vinylBuf = require('vinyl-buffer');
 
 // JavaScript uglify and minify
 const uglify = require('gulp-uglify');
@@ -33,6 +37,7 @@ var pathTo = {
     srcHTML: 'src/**/*.html',
     srcSCSS: 'src/scss/*.scss',
     srcJS: 'src/js/**/*.js',
+    srcJSentry: 'src/js/es2015.js', // INSERT THE PATH AND NAME OF YOUR MAIN JS FILE HERE !!!
     srcIMG: 'src/images/**/*.+(png|jpg|gif|svg)',
     // srcIMG: 'src/images/**/*.{png,jpg,gif,svg}', // OBS! Der må ikke være mellemrum imellem filtyperne.
     srcFonts: 'src/fonts/**/*',
@@ -145,7 +150,7 @@ gulp.task('default', ['browserSync', 'sass', 'autoprefixer', 'babel'], function 
  * gulp-csso
  * gulp-rename
  */
-gulp.task('csso', function () {
+gulp.task('csso', ['sass'], function () {
   // return gulp.src('src/css/styles.css')
     return gulp.src( pathTo.tmpCSSfiles )
     .pipe(csso())
@@ -177,10 +182,23 @@ gulp.task('fonts', function () {
  * gulp-babel
  */
 gulp.task('babel', function () {
-  return gulp.src( pathTo.srcJS )
-    .pipe( babel() )
-    .pipe( uglify() )
-    .pipe(gulp.dest( pathTo.distJS ))
+    return gulp.src( pathTo.srcJS )
+        .pipe( babel() )
+        .pipe( gulp.dest( pathTo.distJS ) );
+});
+
+gulp.task('bundle', function () {
+    return browserify({ entries: pathTo.srcJSentry, debug: false }) // debug enables sourcemaps - not needed for distribution code
+        .transform( 'babelify' )
+        .bundle()
+        .pipe( vinylSrc( 'script.js' ))
+        .pipe( vinylBuf() )
+        .pipe( uglify() )
+        .pipe( gulp.dest( pathTo.distJS ) );
+    // return gulp.src( pathTo.srcJSentry )
+    //   .pipe( babel() )
+      // .pipe( uglify() )
+      // .pipe(gulp.dest( pathTo.distJS ))
 });
 
 /**
@@ -193,7 +211,7 @@ gulp.task('babel', function () {
 //     .pipe(gulp.dest('dist/js'))
 // });
 
-gulp.task('dist', ['csso', 'images', 'fonts', 'babel']);
+gulp.task('dist', ['csso', 'images', 'fonts', 'bundle']);
 
 
 /*
