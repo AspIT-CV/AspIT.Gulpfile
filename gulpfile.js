@@ -27,6 +27,25 @@ const uglify = require('gulp-uglify');
 // Live Preview
 const browserSync = require('browser-sync').create();
 
+/*  */
+var pathTo = {
+    src: 'src',
+    srcHTML: 'src/**/*.html',
+    srcSCSS: 'src/scss/*.scss',
+    srcJS: 'src/js/**/*.js',
+    srcIMG: 'src/images/**/*.+(png|jpg|gif|svg)',
+    // srcIMG: 'src/images/**/*.{png,jpg,gif,svg}', // OBS! Der må ikke være mellemrum imellem filtyperne.
+    srcFonts: 'src/fonts/**/*',
+
+    tmpCSSfolder: 'src/css/',
+    tmpCSSfiles: 'src/css/*.css',
+
+    distCSS: 'dist/css/',
+    distJS: 'dist/js/',
+    distIMG: 'dist/images/',
+    distFonts: 'dist/fonts/'
+};
+
 
 /**
  * ------------------------
@@ -47,11 +66,11 @@ const browserSync = require('browser-sync').create();
  */
 // Definerer en gulp task kaldet sass
 gulp.task('sass', function () {
-  return gulp.src('src/scss/*.scss')
+  return gulp.src( pathTo.srcSCSS )
     .pipe(sass())
 
     // Flyt css filer ind i css mappen
-    .pipe(gulp.dest('src/css'))
+    .pipe(gulp.dest( pathTo.tmpCSSfolder ))
 
     // Reload browserSync
     .pipe(browserSync.reload({
@@ -66,11 +85,12 @@ gulp.task('sass', function () {
  */
 // Definerer en gulp task kalder autoprefixer
 gulp.task('autoprefixer', function () {
-  return gulp.src('src/css/*.css')
+  return gulp.src( pathTo.tmpCSSfiles )
     .pipe(autoprefixer({
       browsers: ['last 2 versions'],
       cascade: false
     }))
+    .pipe( gulp.dest( pathTo.tmpCSSfolder ) )
 });
 
 
@@ -82,7 +102,7 @@ gulp.task('autoprefixer', function () {
 gulp.task('browserSync', function () {
   browserSync.init({
     server: {
-      baseDir: 'src'
+      baseDir: pathTo.src
     },
   })
 })
@@ -93,13 +113,13 @@ gulp.task('browserSync', function () {
  */
 // Watch tasken kører en række tjek inden den starter
 gulp.task('default', ['browserSync', 'sass', 'autoprefixer', 'babel'], function () {
-  gulp.watch('src/scss/*.scss', ['sass']);
+  gulp.watch( pathTo.srcSCSS, ['sass']);
 
   // Reloader browser ved ændringer i .html filer
-  gulp.watch('src/*.html', browserSync.reload);
+  gulp.watch( pathTo.srcHTML, browserSync.reload);
 
   // Reloader browser ved ændringer i .js filer
-  gulp.watch('src/js/**/*.js', browserSync.reload);
+  gulp.watch( pathTo.srcJS, browserSync.reload);
 })
 
 
@@ -126,22 +146,21 @@ gulp.task('default', ['browserSync', 'sass', 'autoprefixer', 'babel'], function 
  * gulp-rename
  */
 gulp.task('csso', function () {
-  return gulp.src('src/css/styles.css')
+  // return gulp.src('src/css/styles.css')
+    return gulp.src( pathTo.tmpCSSfiles )
     .pipe(csso())
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('dist/css'))
-})
+    .pipe(gulp.dest( pathTo.distCSS ))
+});
 
 /**
  * OPTIMIZE IMAGES
  * gulp-imagemin
  */
 gulp.task('images', function () {
-  return gulp.src('src/images/**/*.(png|jpg|gif|svg)')
-    .pipe(imagemin({
-      interlaced: true
-    }))
-    .pipe(gulp.dest('dist/images'))
+  return gulp.src( pathTo.srcIMG )
+    .pipe( imagemin({ interlaced: true }) )
+    .pipe( gulp.dest( pathTo.distIMG ) )
 });
 
 /**
@@ -149,8 +168,8 @@ gulp.task('images', function () {
  *
  */
 gulp.task('fonts', function () {
-  return gulp.src('src/fonts/**/*')
-    .pipe(gulp.dest('dist/fonts'))
+  return gulp.src( pathTo.srcFonts )
+    .pipe(gulp.dest( pathTo.distFonts ))
 });
 
 /**
@@ -158,11 +177,11 @@ gulp.task('fonts', function () {
  * gulp-babel
  */
 gulp.task('babel', function () {
-  return gulp.src('src/js/**/*.js')
-    .pipe(babel())
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/js'))
-})
+  return gulp.src( pathTo.srcJS )
+    .pipe( babel() )
+    .pipe( uglify() )
+    .pipe(gulp.dest( pathTo.distJS ))
+});
 
 /**
  * MINIFY JAVASCRIPT
@@ -174,7 +193,7 @@ gulp.task('babel', function () {
 //     .pipe(gulp.dest('dist/js'))
 // });
 
-gulp.task('dist', ['csso', 'images', 'fonts', 'babel'])
+gulp.task('dist', ['csso', 'images', 'fonts', 'babel']);
 
 
 /*
