@@ -195,10 +195,6 @@ gulp.task('bundle', function () {
         .pipe( vinylBuf() )
         .pipe( uglify() )
         .pipe( gulp.dest( pathTo.distJS ) );
-    // return gulp.src( pathTo.srcJSentry )
-    //   .pipe( babel() )
-      // .pipe( uglify() )
-      // .pipe(gulp.dest( pathTo.distJS ))
 });
 
 /**
