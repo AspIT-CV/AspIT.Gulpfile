@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/AspIT-CV/AspIT.Gulpfile#readme",
   "devDependencies": {
-    "@babel/core": "^7.1.5",
+    "@babel/core": "^7.20.12",
     "@babel/plugin-transform-async-to-generator": "^7.1.0",
     "@babel/preset-env": "^7.1.5",
     "browser-sync": "^2.26.3",
